@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
     protected $fillable = ['category_id','brand_id','name','slug','images','description','price','is_active','is_feature','is_stock','on_sale'];
 
-    protected $casts = ['imaes'=>array()];
+    protected $casts = ['images'=> 'array'];
 
     public function category()
     {
@@ -19,5 +19,10 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+
+     public function orderItems()
+    {
+        return $this->belongsTo(OrderItem::class);
     }
 }
