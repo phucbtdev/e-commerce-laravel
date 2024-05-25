@@ -77,12 +77,10 @@ class OrdersRelationManager extends RelationManager
                 // Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-
                 Action::make("View order")
-                ->url(fn (Order $record ): string => OrderResource::getUrl('view',['record' => $record]))
-                ->color('infor')
-                ->icon('heroicon-o-eye')
-                ,
+                    ->url(fn (Order $record ): string => OrderResource::getUrl('view',['record' => $record]))
+                    ->color('infor')
+                    ->icon('heroicon-o-eye'),
                 
                 Tables\Actions\DeleteAction::make(),
             ])
