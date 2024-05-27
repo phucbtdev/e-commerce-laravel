@@ -8,9 +8,14 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\Attributes\Url;
 use Livewire\Attributes\Title;
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ProductPage extends Component
 {
+    use LivewireAlert;
+    
     #[Title('Product page')]
 
     #[Url]
@@ -22,11 +27,26 @@ class ProductPage extends Component
     #[Url]
     public $is_stock;
 
-      #[Url]
+    #[Url]
     public $on_sale;
 
     #[Url]
-    public $price;
+    public $price = 50000;
+
+    #[Url]
+    public $sort = 'latest';
+
+    public function addToCart($product_id){
+        $total_count = CartManagement::addItemToCart($product_id);
+        $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+
+        $this->alert('success', 'Product added to the cart successfully!', [
+            'position' => 'top-end',
+            'timer' => '3000',
+            'toast' => true,
+            'timerProgressBar' => true,
+        ]); 
+    }
     
     public function render()
     {
@@ -52,6 +72,15 @@ class ProductPage extends Component
         if ($this->price) {
             $products->whereBetween('price', [0 , $this->price]);
         }
+
+        if ($this->sort == 'latest') {
+            $products->latest();
+        }
+
+        if ($this->sort == 'price') {
+            $products->orderBy('price');
+        }
+
 
         return view('livewire.product-page',[
             'products' => $products->paginate(9),
