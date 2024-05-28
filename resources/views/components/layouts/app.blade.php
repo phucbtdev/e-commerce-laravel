@@ -18,10 +18,11 @@
     </main>
     @livewire('partials.footer')
 
+   
     @livewireScripts
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <x-livewire-alert::scripts />
+   <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 </body>
 
 </html>
