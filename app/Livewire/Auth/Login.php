@@ -4,12 +4,8 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use Livewire\Attributes\Title;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-
 class Login extends Component
 {
-
-    use LivewireAlert;
     #[Title('Login page')]
 
     public $email;
@@ -22,12 +18,7 @@ class Login extends Component
         ]);
 
         if (!auth()->attempt(['email'=> $this->email, 'password'=> $this->password])) {
-            // session()->flash('error', 'Invalid credentials');
-            $this->alert('error', 'Invalid credentials!', [
-                'position' => 'top-end',
-                'timer' => 3000,
-                'toast' => true,
-            ]);
+            session()->flash('error', 'Invalid credentials');
             return;
         }
 

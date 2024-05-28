@@ -1,11 +1,6 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
     <div class="flex h-full items-center">
         <main class="w-full max-w-md mx-auto p-6">
-            @error('error')
-            <div class="mt-2 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500" role="alert">
-                {{$message}}
-            </div>
-            @enderror
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-4 sm:p-7">
                     <div class="text-center">
@@ -18,11 +13,14 @@
                             </a>
                         </p>
                     </div>
-
                     <hr class="my-5 border-slate-300">
-
                     <!-- Form -->
                     <form wire:submit.prevent='save'>
+                        @if (session('error'))
+                            <div class="mt-2 mb-4 bg-red-100 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500" role="alert">
+                                {{session('error')}}
+                            </div>
+                        @endif
                         <div class="grid gap-y-4">
                             <!-- Form Group -->
                             <div>
