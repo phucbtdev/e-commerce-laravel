@@ -35,7 +35,7 @@ Route::get('/cart', CartPage::class);
 
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', Login::class);
+    Route::get('/login', Login::class)->name('login');
     Route::get('/register', Register::class);
     Route::get('/forgot', Forgot::class);
     Route::get('/reset', Reset::class);
