@@ -1,4 +1,4 @@
-<section class="flex items-center font-poppins dark:bg-gray-800 ">
+<section class="flex items-center font-poppins dark:bg-gray-800 my-7">
     <div
         class="justify-center flex-1 max-w-6xl px-4 py-4 mx-auto bg-white border rounded-md dark:border-gray-900 dark:bg-gray-900 md:py-10 md:px-10">
         <div>
