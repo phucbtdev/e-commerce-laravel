@@ -4,8 +4,10 @@ namespace App\Livewire;
 
 use App\Helpers\CartManagement;
 use App\Helpers\Momo;
+use App\Mail\OrderPlace;
 use App\Models\Address;
 use App\Models\Order;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -105,7 +107,9 @@ class CheckoutPage extends Component
         $address->order_id = $order->id;
         $address->save();
         $order->items()->createMany($cart_items);
+
         CartManagement::clearCartItems();
+        Mail::to(auth()->user())->send(new OrderPlace($order));
 
         return redirect($redirect_url);
     }
