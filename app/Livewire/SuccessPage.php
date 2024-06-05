@@ -2,14 +2,20 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
+use App\Models\Order;
 use Livewire\Attributes\Title;
+use Livewire\Component;
 
 class SuccessPage extends Component
 {
-    #[Title('Success page')] 
+    #[Title('Success page')]
+
     public function render()
     {
-        return view('livewire.success-page');
+        $order_latest = Order::with('address')->latest()->first();
+
+        return view('livewire.success-page', [
+            'order_latest' => $order_latest,
+        ]);
     }
 }
