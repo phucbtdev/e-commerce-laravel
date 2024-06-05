@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Helpers\CartManagement;
+use App\Helpers\Momo;
 use App\Models\Address;
 use App\Models\Order;
 use Livewire\Attributes\Title;
@@ -82,6 +83,20 @@ class CheckoutPage extends Component
         $redirect_url = '';
 
         if ($this->payment_method === 'momo') {
+            $response = Momo::payment();
+            // $sessionCheckOut = Session::create([
+            //     'payment_method_types' => ['card'],
+            //     'customer_email' => auth()->user()->email,
+            //     'lines_items' => $line_items,
+            //     'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
+            //     'cancel_url' => route('cancel'),
+            // ]);
+
+            if ($response['errorCode'] == 0) {
+                $redirect_url = $response['payUrl'];
+            }
+        } else if ($this->payment_method === 'vnpay') {
+
         } else {
             $redirect_url = 'success';
         }

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::get('/', HomePage::class)->name('home');
 Route::get('/home', HomePage::class);
@@ -34,13 +34,12 @@ Route::get('/products', ProductPage::class);
 Route::get('/products/{slug}', ProductDetailPage::class);
 Route::get('/cart', CartPage::class);
 
-
 Route::middleware('guest')->group(function () {
     Route::get('/login', Login::class)->name('login');
     Route::get('/register', Register::class);
     Route::get('/forgot', Forgot::class)->name('password.request');
     Route::get('/reset/{token}', Reset::class)->name('password.reset');
-  
+
 });
 
 Route::middleware('auth')->group(function () {
@@ -52,6 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-orders', MyOrderPage::class);
     Route::get('/my-orders/{slug}', OrderDetailPage::class);
 
-    Route::get('/success', SuccessPage::class);
-    Route::get('/cancel', CancelPage::class);
+    Route::get('/success', SuccessPage::class)->name('success');
+    Route::get('/cancel', CancelPage::class)->name('cancel');
 });
