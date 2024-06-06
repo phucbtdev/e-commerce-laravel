@@ -2,38 +2,42 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-use Livewire\Attributes\Title;
 use App\Helpers\CartManagement;
 use App\Livewire\Partials\Navbar;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Title;
+use Livewire\Component;
 
 class CartPage extends Component
 {
     use LivewireAlert;
-    
+
     #[Title('Cart page')]
 
     public $cart_items = [];
 
     public $grand_total;
 
-    public function mount(){
+    public function mount()
+    {
         $this->cart_items = CartManagement::getCartItemsFromCookie();
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }
 
-    public function incrementQuantity($product_id){
+    public function incrementQuantity($product_id)
+    {
         $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id);
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }
 
-     public function decrementQuantity($product_id){
+    public function decrementQuantity($product_id)
+    {
         $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id);
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
     }
 
-    public function removeItem($product_id){
+    public function removeItem($product_id)
+    {
         $this->cart_items = CartManagement::remove($product_id);
         $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
         $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
@@ -43,9 +47,9 @@ class CartPage extends Component
             'timer' => '3000',
             'toast' => true,
             'timerProgressBar' => true,
-        ]); 
+        ]);
     }
-    
+
     public function render()
     {
         return view('livewire.cart-page');

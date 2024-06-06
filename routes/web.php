@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/checkout', CheckoutPage::class);
     Route::get('/my-orders', MyOrderPage::class);
-    Route::get('/my-orders/{slug}', OrderDetailPage::class)->name('my-orders');
+    Route::get('/my-orders/{order_id}', OrderDetailPage::class)->name('my-orders');
 
     Route::get('/success', SuccessPage::class)->name('success');
     Route::get('/cancel', CancelPage::class)->name('cancel');

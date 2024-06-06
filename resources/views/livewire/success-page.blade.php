@@ -15,7 +15,8 @@
                                 {{ $order_latest->address->street_address }}</p>
 
                             <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">
-                                {{ $order_latest->address->city }}</p>
+                                {{ $order_latest->address->city }},{{ $order_latest->address->state }},{{ $order_latest->address->zipcode }}
+                            </p>
                             <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">Phone:
                                 {{ $order_latest->address->phone }}</p>
                         </div>
@@ -33,7 +34,7 @@
                     <p class="mb-2 text-sm leading-5 text-gray-600 dark:text-gray-400 ">
                         Date: </p>
                     <p class="text-base font-semibold leading-4 text-gray-800 dark:text-gray-400">
-                        {{ $order_latest->created_at }}</p>
+                        {{ $order_latest->created_at->format('d-m-Y') }}</p>
                 </div>
                 <div class="w-full px-4 mb-4 md:w-1/4">
                     <p class="mb-2 text-sm font-medium leading-5 text-gray-800 dark:text-gray-400 ">
@@ -108,7 +109,7 @@
                     class="w-full text-center px-4 py-2 text-blue-500 border border-blue-500 rounded-md md:w-auto hover:text-white hover:bg-blue-600 dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-300">
                     Go back shopping
                 </a>
-                <a href="/orders"
+                <a href="/my-orders"
                     class="w-full text-center px-4 py-2 bg-blue-500 rounded-md text-gray-50 md:w-auto dark:text-gray-300 hover:bg-blue-600 dark:hover:bg-gray-700 dark:bg-gray-800">
                     View My Orders
                 </a>

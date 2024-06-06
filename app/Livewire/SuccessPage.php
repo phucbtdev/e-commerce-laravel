@@ -12,7 +12,8 @@ class SuccessPage extends Component
 
     public function render()
     {
-        $order_latest = Order::with('address')->latest()->first();
+
+        $order_latest = Order::with('address')->where('user_id', auth()->user()->id)->latest()->first();
 
         return view('livewire.success-page', [
             'order_latest' => $order_latest,
