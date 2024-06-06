@@ -55,6 +55,23 @@
                                             '<span class="bg-red-500 py-1 px-3 rounded text-white shadow">Cancel</span>';
                                     }
 
+                                    $payment_status = '';
+
+                                    if ($order->payment_status == 'pending') {
+                                        $payment_status =
+                                            '<span class="bg-blue-500 py-1 px-3 rounded text-white shadow">Pending</span>';
+                                    }
+
+                                    if ($order->payment_status == 'paid') {
+                                        $payment_status =
+                                            '<span class="bg-green-700 py-1 px-3 rounded text-white shadow">Paid</span>';
+                                    }
+
+                                    if ($order->payment_status == 'failed') {
+                                        $payment_status =
+                                            '<span class="bg-red-500 py-1 px-3 rounded text-white shadow">Failed</span>';
+                                    }
+
                                 @endphp
                                 <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
                                     <td
@@ -69,8 +86,7 @@
                                     </td>
                                     <td
                                         class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-800 dark:text-gray-200">
-                                        <span
-                                            class="bg-green-500 py-1 px-3 rounded text-white shadow">{{ $order->payment_status }}</span>
+                                        {!! $payment_status !!}
                                     </td>
                                     <td
                                         class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-800 dark:text-gray-200">

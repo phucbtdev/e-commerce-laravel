@@ -194,7 +194,7 @@
                     </div>
                     </hr>
                 </div>
-                <button type="submit" name="payUrl"
+                <button type="submit"
                     class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
                     <span wire:loading.remove>Place order</span><span wire:loading>Processing...</span>
                 </button>
