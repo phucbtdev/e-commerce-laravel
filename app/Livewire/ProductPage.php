@@ -2,20 +2,20 @@
 
 namespace App\Livewire;
 
-use App\Models\Brand;
-use App\Models\Product;
-use Livewire\Component;
-use App\Models\Category;
-use Livewire\Attributes\Url;
-use Livewire\Attributes\Title;
 use App\Helpers\CartManagement;
 use App\Livewire\Partials\Navbar;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
+use Livewire\Component;
 
 class ProductPage extends Component
 {
     use LivewireAlert;
-    
+
     #[Title('Product page')]
 
     #[Url]
@@ -36,18 +36,19 @@ class ProductPage extends Component
     #[Url]
     public $sort = 'latest';
 
-    public function addToCart($product_id){
+    public function addToCart($product_id)
+    {
         $total_count = CartManagement::addItemToCart($product_id);
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 
         $this->alert('success', 'Product added to the cart successfully!', [
-            'position' => 'top-end',
+            'position' => 'bottom-end',
             'timer' => '3000',
             'toast' => true,
             'timerProgressBar' => true,
-        ]); 
+        ]);
     }
-    
+
     public function render()
     {
         $products = Product::where('is_active', 1);
@@ -56,7 +57,6 @@ class ProductPage extends Component
             $products->whereIn('category_id', $this->search_categories);
         }
 
-        
         if (!empty($this->search_brands)) {
             $products->whereIn('brand_id', $this->search_brands);
         }
@@ -70,7 +70,7 @@ class ProductPage extends Component
         }
 
         if ($this->price) {
-            $products->whereBetween('price', [0 , $this->price]);
+            $products->whereBetween('price', [0, $this->price]);
         }
 
         if ($this->sort == 'latest') {
@@ -81,11 +81,10 @@ class ProductPage extends Component
             $products->orderBy('price');
         }
 
-
-        return view('livewire.product-page',[
+        return view('livewire.product-page', [
             'products' => $products->paginate(9),
-            'brands' => Brand::where('is_active', 1)->get(['id','name','slug']),
-            'categories' =>Category::where('is_active', 1)->get(['id','name','slug'])
+            'brands' => Brand::where('is_active', 1)->get(['id', 'name', 'slug']),
+            'categories' => Category::where('is_active', 1)->get(['id', 'name', 'slug']),
         ]);
     }
 }

@@ -43,7 +43,7 @@ class CartPage extends Component
         $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
 
         $this->alert('success', 'Product removed to the cart successfully!', [
-            'position' => 'top-end',
+            'position' => 'bottom-end',
             'timer' => '3000',
             'toast' => true,
             'timerProgressBar' => true,
